@@ -1,13 +1,10 @@
-# frozen_string_literal: true
+# spec/requests/products_spec.rb
 
 require 'rails_helper'
 
 RSpec.describe '/products', type: :request do
-  let(:valid_attributes) do
-    { name: 'Sneakers', price: 49.99, quantity: 4 }
-  end
-
-  let(:invalid_attributes) {{ name: '' }}
+  let(:valid_attributes) { { name: 'Sneakers', price: 49.99, quantity: 4 } }
+  let(:invalid_attributes) { { name: '' } }
 
   describe 'GET /index' do
     it 'renders a successful response' do
@@ -70,15 +67,17 @@ RSpec.describe '/products', type: :request do
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
+      let(:new_attributes) { { name: 'name', price: 12, quantity: 123 } }
 
       it 'updates the requested product' do
         product = Product.create! valid_attributes
         patch product_url(product), params: { product: new_attributes }
         product.reload
-        skip('Add assertions for updated state')
+        expect(
+          product.attributes.values_at(:name, :price, :quantity)
+        ).to eq(
+          new_attributes.values_at('name', 'price', 'quantity')
+        )
       end
 
       it 'redirects to the product' do
