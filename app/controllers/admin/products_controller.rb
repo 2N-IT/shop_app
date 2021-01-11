@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 module Admin
   class ProductsController < Admin::BaseController
-    before_action :set_product, only: [:show, :edit, :update, :destroy]
-
     # GET /products
     def index
       @products = Product.all
@@ -9,15 +9,17 @@ module Admin
 
     # GET /products/1
     def show
+      @product = product
     end
 
     # GET /products/new
     def new
-      @product = Product.new
+      render :form, locals: { product: Product.new, method: :post, url: admin_products_path }
     end
 
     # GET /products/1/edit
     def edit
+      render :form, locals: { product: product, method: :put, url: admin_product_path(product) }
     end
 
     # POST /products
@@ -28,34 +30,36 @@ module Admin
         if @product.save
           format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully created.' }
         else
-          format.html { render :new }
+          format.html { render :form, locals: { product: @product, url: admin_products_path, method: :post } }
         end
       end
     end
 
     # PATCH/PUT /products/1
     def update
+      @product = product
       respond_to do |format|
         if @product.update(product_params)
           format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully updated.' }
         else
-          format.html { render :edit }
+          format.html { render :form, locals: { product: product, method: :put, url: admin_product_path(product) } }
         end
       end
     end
 
     # DELETE /products/1
     def destroy
-      @product.destroy
+      product.destroy
       respond_to do |format|
         format.html { redirect_to admin_products_url, notice: 'Product was successfully destroyed.' }
       end
     end
 
     private
+
     # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
+    def product
+      @product ||= Product.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

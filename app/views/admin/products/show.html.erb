@@ -1,4 +1,41 @@
-<p id="notice"><%= notice %></p>
+<!--For now this view is just another table until out products have more going on. Treat this as a nice looking placeholder-->
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><a href=<%=admin_home_path %>>Admin</a></li>
+      <li><a href=<%=admin_home_path %>>Home</a></li>
+      <li><a href=<%=admin_products_path %>>Products</a></li>
+      <li class="is-active" aria-current="page"><a href=<%=admin_product_path(@product) %>><%=@product.name %></a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <table class="table is-bordered is-hoverable is-fullwidth is-striped" >
+      <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
 
-<%= link_to 'Edit', edit_admin_product_path(@product) %> |
-<%= link_to 'Back', admin_products_path %>
+      <tbody>
+        <tr>
+          <td> <%= @product.name %></td>
+          <td> <%= @product.price %> $</td>
+          <td> <%= @product.quantity %></td>
+          <td>
+            <div class="field is-grouped">
+              <p class="control">
+                <button class="button is-small is-link"><%= link_to 'Edit', edit_admin_product_path(@product), class: "has-text-white" %></button>
+              </p>
+              <p class="control">
+                <button class="button is-small is-danger"><%= link_to 'Destroy', admin_product_path(@product), class: "has-text-white", method: :delete, data: { confirm: 'Are you sure?' } %></button>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -5,14 +5,89 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
     <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
   </head>
   <body>
+    <nav class="navbar is-white">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item brand-text" href=<%= admin_home_path %>>
+            Shop Admin
+          </a>
+          <div class="navbar-burger burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div id="navMenu" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href=<%=admin_home_path %>>
+              Home
+            </a>
+            <a class="navbar-item" href=<%=admin_products_path %>>
+              Products
+            </a>
+            <a class="navbar-item" href=<%=admin_home_path %>>
+              TODO
+            </a>
+            <a class="navbar-item" href=<%=admin_home_path %>>
+              TODO
+            </a>
+            <a class="navbar-item" href=<%=admin_home_path %>>
+              TODO
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container">
+      <div class="columns">
+        <div class="column is-3 ">
+          <aside class="menu is-hidden-mobile">
+            <p class="menu-label">
+              General
+            </p>
+            <ul class="menu-list">
+              <li><a class="is-active">Dashboard</a></li>
+              <li><a>Customers</a></li>
+            </ul>
+            <p class="menu-label">
+              Administration
+            </p>
+            <ul class="menu-list">
+              <li><a>Team Settings</a></li>
+              <li>
+                <a>Manage Your Team</a>
+                <ul>
+                  <li><a>Members</a></li>
+                  <li><a>Add a member</a></li>
+                  <li><a>Remove a member</a></li>
+                </ul>
+              </li>
+              <li><a>Invitations</a></li>
+            </ul>
+            <p class="menu-label">
+              Transactions
+            </p>
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+              <li><a>Reports</a></li>
+            </ul>
+          </aside>
+        </div>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

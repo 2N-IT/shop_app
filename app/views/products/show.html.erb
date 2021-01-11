@@ -1,3 +1,52 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Back', products_path %>
+<section class="hero is-primary ">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Product: <strong><%= @product.name %></strong>
+      </h1>
+      <h2 class="subtitle">
+        Price: <strong><%= @product.price %></strong>
+      </h2>
+    </div>
+  </div>
+</section>
+<div class="box">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-256x256">
+         <img src="https://fuzati.com/wp-content/uploads/2016/12/Ruby-Logo.png" alt="Image">
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <h5>
+          <strong><%= @product.name %></strong> <small>in stock:</small> <small><%= @product.quantity %></small>
+          <br>
+        </h5>
+        <h6>More content wil get here once our products can store more data and are in general more interesting items to work with.</h6>
+      </div>
+      <nav class="level">
+        <div class="level-left">
+          <a class="level-item" aria-label="reply">
+            <span class="icon is-small">
+              <i class="fas fa-flag" aria-hidden="true"></i>
+              <!--TODO this will create a subscription to an item that is out of stock to receive an email when it is in stock again-->
+            </span>
+          </a>
+          <a class="level-item" aria-label="retweet">
+            <span class="icon is-small">
+              <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+              <!--TODO this will add item to cart-->
+            </span>
+          </a>
+          <a class="level-item" aria-label="like">
+            <span class="icon is-small">
+              <i class="fas fa-heart" aria-hidden="true"></i>
+              <!--TODO this will add item to favorites-->
+            </span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </article>
+</div>

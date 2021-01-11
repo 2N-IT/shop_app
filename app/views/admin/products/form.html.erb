@@ -1,0 +1,84 @@
+<section class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><a href=<%=admin_home_path %>>Admin</a></li>
+      <li><a href=<%=admin_home_path %>>Home</a></li>
+      <li><a href=<%=admin_products_path %>>Products</a></li>
+      <% if method == :post %>
+        <li class="is-active" aria-current="page"><a href=<%=new_admin_product_path %>>New Product</a></li>
+      <% else %>
+        <li class="is-active" aria-current="page"><a href=<%=edit_admin_product_path(product) %>>Edit <%=product.name %></a></li>
+      <% end %>
+
+    </ul>
+  </nav>
+  <div class="container">
+    <%= form_with url: url, method: method, model: product do |form| %>
+      <div class="control">
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Name</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control has-icons-left">
+                <%= form.text_field :name, class: "input" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-box"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Price</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control has-icons-left">
+                <%= form.number_field :price, class: "input" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-dollar-sign"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Quantity</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control has-icons-left">
+                <%= form.number_field :quantity, class: "input" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-archive"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <!-- Left empty for spacing -->
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <button type="submit" class="button is-primary">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

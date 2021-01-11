@@ -1,16 +1,20 @@
-<section class="section">
-  <p id="notice"><%= notice %></p>
+<div class="column is-9">
 
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><a href=<%=admin_home_path %>>Admin</a></li>
+      <li><a href=<%=admin_home_path %>>Home</a></li>
+      <li class="is-active" aria-current="page"><a href=<%=admin_products_path %>>Products</a></li>
+    </ul>
+  </nav>
   <div class="container">
-    <h1 class="title">Products</h1>
-    <h2 class="subtitle">
-      A simple products index page
-    </h2>
     <table class="table is-bordered is-hoverable is-fullwidth is-striped" >
       <thead>
       <tr>
         <th>ID</th>
         <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -18,6 +22,8 @@
       <tr>
         <th>ID</th>
         <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
         <th>Actions</th>
       </tr>
       </tfoot>
@@ -26,16 +32,18 @@
         <tr>
           <td> <%= product.id %></td>
           <td> <%= product.name %></td>
+          <td> <%= product.price %> $</td>
+          <td> <%= product.quantity %></td>
           <td>
             <div class="field is-grouped">
               <p class="control">
-                <button class="button is-small is-warning"><%= link_to 'Show', product %></button>
+                <button class="button is-small is-warning"><%= link_to 'Show', admin_product_path(product), class: "has-text-white" %></button>
               </p>
               <p class="control">
-                <button class="button is-small is-link"><%= link_to 'Edit', edit_admin_product_path(product) %></button>
+                <button class="button is-small is-link"><%= link_to 'Edit', edit_admin_product_path(product), class: "has-text-white" %></button>
               </p>
               <p class="control">
-                <button class="button is-small is-danger"><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></button>
+                <button class="button is-small is-danger"><%= link_to 'Destroy', admin_product_path(product), class: "has-text-white", method: :delete, data: { confirm: 'Are you sure?' } %></button>
               </p>
             </div>
           </td>
@@ -45,6 +53,6 @@
     </table>
   </div>
   <div class="container mt-5">
-    <button class="button is-info"><%= link_to 'New Product', new_admin_product_path %></button>
+    <button class="button is-info"><%= link_to 'New Product', new_admin_product_path, class: "has-text-white" %></button>
   </div>
-</section>
+</div>

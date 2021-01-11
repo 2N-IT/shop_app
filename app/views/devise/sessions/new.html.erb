@@ -17,19 +17,19 @@
           <br />
           <button class="button is-block is-fullwidth is-danger is-medium is-rounded" type="submit">
             Login
-            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
           </button>
           <% end %>
         <br>
         <nav class="level">
           <div class="level-item has-text-centered">
             <div>
-              <a href="#">Forgot Password?</a>
+              <a href=<%= new_user_password_path %>>Forgot Password?</a>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
-              <a href="#">Create an Account</a>
+              <a href=<%= new_user_registration_path %>>Create an Account</a>
             </div>
           </div>
         </nav>
