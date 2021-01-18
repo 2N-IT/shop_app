@@ -1,6 +1,7 @@
 <div class="modal" id="<%= "modal#{product.id}" %>">
   <div class="modal-background"></div>
   <div class="modal-card">
+    <!-- TODO: at some point not only current user will have acess to the cart -->
     <%= form_with url: cart_url(current_user.cart.id), method: :patch, model: current_user.cart do |f| %>
       <header class="modal-card-head">
         <p class="modal-card-title">Add <%= product.name %> to cart</p>
@@ -16,7 +17,7 @@
             </button>
           </div>
           <div class="control">
-            <%= f.number_field :quantity, class:"input", value:1 %>
+            <%= f.number_field :quantity, class:"input", value: product_item.nil? ? 1 : product_item.quantity, min:"0", max: "#{product.quantity}" %>
             <%= f.hidden_field :product_id, class:"input", value: product.id %>
           </div>
           <div class="control plus">
@@ -30,7 +31,6 @@
       </section>
       <footer class="modal-card-foot">
         <button class="button delete-modal is-success">Add</button>
-        <button class="button delete-modal" type="submit">Cancel</button>
       </footer>
     <% end %>
   </div>

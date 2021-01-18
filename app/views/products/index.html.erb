@@ -18,42 +18,42 @@
 <section class="container">
   <% @products.each_slice(3) do |batch| %>
     <div class="columns features">
-    <% batch.each do |product| %>
-      <div class="column is-4">
-        <div class="card is-shady">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="https://fuzati.com/wp-content/uploads/2016/12/Ruby-Logo.png" alt="Placeholder image" class="modal-button" data-target="modal-image2">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <h5><%= product.name %></h5>
-              <h6><%= product.price %></h6>
-              <div>
-                In stock: <span class="is-size-6 has-text-weight-semibold	"><%= product.quantity %></span>
-              </div>
-              <div class="columns is-vcentered">
-                <div class="column">
-                  <span class="button is-link">
-                    <%= link_to(product) do %>
-                      <span class="has-text-white is-size-6 has-text-weight-semibold">Details</span>
-                    <% end %>
-                  </span>
+      <% batch.each do |product| %>
+        <div class="column is-4">
+          <div class="card is-shady">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="https://fuzati.com/wp-content/uploads/2016/12/Ruby-Logo.png" alt="Placeholder image" class="modal-button" data-target="modal-image2">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="content">
+                <h5><%= product.name %></h5>
+                <h6><%= product.price %></h6>
+                <div>
+                  In stock: <span class="is-size-6 has-text-weight-semibold	"><%= product.quantity %></span>
                 </div>
-                <div class="column">
-                  <span class="icon-text has-text-primary is-vcentered">
-                    <span data-modal_id="<%= product.id %>" class="modal-control icon"><i class=" fas fa-shopping-cart" aria-hidden="true" ></i></span>
-                    <span data-modal_id="<%= product.id %>" class="modal-control">Add to cart</span>
-                    <%= render partial: "cart_control", locals: { product: product } %>
-                  </span>
+                <div class="columns is-vcentered">
+                  <div class="column">
+                    <span class="button is-link">
+                      <%= link_to(product) do %>
+                        <span class="has-text-white is-size-6 has-text-weight-semibold">Details</span>
+                      <% end %>
+                    </span>
+                  </div>
+                  <div class="column">
+                    <span class="icon-text has-text-primary is-vcentered" style="cursor: pointer">
+                      <span data-modal_id="<%= product.id %>" class="modal-control icon"><i class=" fas fa-shopping-cart" aria-hidden="true" ></i></span>
+                      <span data-modal_id="<%= product.id %>" class="modal-control">Add to cart</span>
+                      <%= render partial: "cart_control", locals: { product: product, product_item: ProductItem.find_by(product_id: product.id, cart_id: current_user.cart.id) } %>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+     </div>
   <% end %>
 </section>

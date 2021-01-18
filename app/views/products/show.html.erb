@@ -27,17 +27,17 @@
       </div>
       <nav class="level">
         <div class="level-left">
-          <a class="level-item" aria-label="reply">
+          <a class="level-item" aria-label="subscribe">
             <span class="icon is-small">
               <i class="fas fa-flag" aria-hidden="true"></i>
               <!--TODO this will create a subscription to an item that is out of stock to receive an email when it is in stock again-->
             </span>
           </a>
-          <a class="level-item" aria-label="retweet">
-            <span class="icon is-small">
+          <a class="level-item" aria-label="cart" style="cursor: pointer">
+            <span data-modal_id="<%= @product.id %>" class="modal-control icon">
               <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-              <!--TODO this will add item to cart-->
             </span>
+            <%= render partial: "cart_control", locals: { product: @product, product_item: ProductItem.find_by(product_id: @product.id, cart_id: current_user.cart.id) } %>
           </a>
           <a class="level-item" aria-label="like">
             <span class="icon is-small">
