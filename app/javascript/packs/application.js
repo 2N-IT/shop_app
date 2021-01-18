@@ -12,3 +12,5 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 import "@fortawesome/fontawesome-free/css/all"
+require("packs/modal_control.js")
+require("packs/integer_input.js")

@@ -1,0 +1,37 @@
+<div class="modal" id="<%= "modal#{product.id}" %>">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <%= form_with url: cart_url(current_user.cart.id), method: :patch, model: current_user.cart do |f| %>
+      <header class="modal-card-head">
+        <p class="modal-card-title">Add <%= product.name %> to cart</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field has-addons">
+          <div class="control minus">
+            <button class="button is-danger">
+            <span class="icon is-small">
+              <i class="fas fa-minus"></i>
+            </span>
+            </button>
+          </div>
+          <div class="control">
+            <%= f.number_field :quantity, class:"input", value:1 %>
+            <%= f.hidden_field :product_id, class:"input", value: product.id %>
+          </div>
+          <div class="control plus">
+            <button class="button is-success">
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button delete-modal is-success">Add</button>
+        <button class="button delete-modal" type="submit">Cancel</button>
+      </footer>
+    <% end %>
+  </div>
+</div>

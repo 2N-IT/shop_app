@@ -33,11 +33,22 @@
               <div>
                 In stock: <span class="is-size-6 has-text-weight-semibold	"><%= product.quantity %></span>
               </div>
-              <span class="button is-link">
-                <%= link_to(product) do %>
-                  <span class="has-text-white is-size-6 has-text-weight-semibold">Details</span>
-                <% end %>
-              </span>
+              <div class="columns is-vcentered">
+                <div class="column">
+                  <span class="button is-link">
+                    <%= link_to(product) do %>
+                      <span class="has-text-white is-size-6 has-text-weight-semibold">Details</span>
+                    <% end %>
+                  </span>
+                </div>
+                <div class="column">
+                  <span class="icon-text has-text-primary is-vcentered">
+                    <span data-modal_id="<%= product.id %>" class="modal-control icon"><i class=" fas fa-shopping-cart" aria-hidden="true" ></i></span>
+                    <span data-modal_id="<%= product.id %>" class="modal-control">Add to cart</span>
+                    <%= render partial: "cart_control", locals: { product: product } %>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

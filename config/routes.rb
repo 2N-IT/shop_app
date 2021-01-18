@@ -2,10 +2,11 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  root "products#index"
+  root 'products#index'
   namespace :admin do
-      resources :products
-      get 'home', to: 'home#index'
+    resources :products
+    get 'home', to: 'home#index'
   end
   resources :products
+  resources :carts, only: %i[update destroy show]
 end
