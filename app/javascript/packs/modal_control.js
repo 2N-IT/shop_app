@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("turbolinks:load", function(event) {
   const controls = document.querySelectorAll('.modal-control')
 
   controls.forEach(function(control) {

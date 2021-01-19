@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("turbolinks:load", function(event) {
   const minuses = document.querySelectorAll('.minus')
     minuses.forEach(function (el) {
       el.addEventListener('click', (function () {
