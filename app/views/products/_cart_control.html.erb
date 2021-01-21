@@ -9,7 +9,7 @@
       </header>
       <section class="modal-card-body">
         <div class="field has-addons">
-          <div class="control minus">
+          <div class="control minus" id="<%= "cart_minus#{product.id}"  %>">
             <button class="button is-danger">
             <span class="icon is-small">
               <i class="fas fa-minus"></i>
@@ -17,10 +17,10 @@
             </button>
           </div>
           <div class="control">
-            <%= f.number_field :quantity, class:"input", value: product_item.nil? ? 1 : product_item.quantity, min:"0", max: "#{product.quantity}" %>
+            <%= f.number_field :quantity, class:"input", value: product_item.nil? ? 1 : product_item.quantity, min:"0", max: "#{product.quantity}", id: "cart_quantity#{product.id}" %>
             <%= f.hidden_field :product_id, class:"input", value: product.id %>
           </div>
-          <div class="control plus">
+          <div class="control plus" id="<%= "cart_plus#{product.id}"  %>">
             <button class="button is-success">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>

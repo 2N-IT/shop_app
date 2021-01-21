@@ -1,16 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe '/products', type: :request do
-  let(:valid_attributes) { { name: 'Sneakers', price: 49.99, quantity: 4 } }
+  let(:cart) { create :cart }
+  let!(:products) { create_list(:product, 2) }
 
   before(:each) do
-    user = User.create(admin: false, email: "email@admin.pl", password: "123blabla345")
-    sign_in(user)
+    login_as(cart.user, scope: :user)
   end
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Product.create! valid_attributes
       get products_url
       expect(response).to be_successful
     end
@@ -18,8 +17,7 @@ RSpec.describe '/products', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      product = Product.create! valid_attributes
-      get product_url(product)
+      get product_url(products.sample.id)
       expect(response).to be_successful
     end
   end

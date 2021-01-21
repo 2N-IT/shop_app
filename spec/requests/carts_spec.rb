@@ -3,15 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe '/carts', type: :request do
-  let(:user) { User.create(admin: false, email: 'email@admin.pl', password: '123blabla345') }
+  let(:cart) { create :cart, :with_items }
+  let(:product_item) { cart.product_items.first }
 
   before(:each) do
-    sign_in(user)
+    login_as(cart.user, scope: :user)
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      cart = Cart.create!
       get cart_url(cart)
       expect(response).to be_successful
     end
@@ -19,19 +19,15 @@ RSpec.describe '/carts', type: :request do
 
   describe 'PATCH /update' do
     it 'renders a successful response' do
-      cart = Cart.create!(user: user)
-      product = Product.create(name: 'test', price: 12.12, quantity: 12)
-      patch cart_url(id: cart.id, cart: { quantity: 3, product_id: product.id })
+      patch cart_url(id: cart.id, cart: { quantity: 3, product_id: product_item.product_id })
       expect(response).to be_successful
-      expect(cart.reload.product_items.first.quantity).to eq 3
-      expect(cart.reload.product_items.first.name).to eq 'test'
+      expect(product_item.reload.quantity).to eq 3
+      expect(product_item.reload.name).to include 'ProductCool'
     end
   end
 
   describe 'DELETE /destroy' do
     it 'renders a successful response' do
-      cart = Cart.create!(user: user)
-      ProductItem.create(name: 'test', cart: cart)
       delete cart_url(cart.id)
       expect(cart.reload.product_items.size.zero?).to eq true
     end
