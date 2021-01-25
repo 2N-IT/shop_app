@@ -12,30 +12,19 @@
       </div>
     </div>
   </div>
-  <ul>
-    <% current_user.cart.product_items.each do |item| %>
-      <li class="m-5 p-3">
-        <div class="container">
-          <div class="box is-rounded is-centered has-background-primary-light">
-            <div class="columns is-multiline is-vcentered">
-              <div class="column">
-                  <img class="image is-64x64" src="https://fuzati.com/wp-content/uploads/2016/12/Ruby-Logo.png">
-              </div>
-              <div class="column is-two-fifths">
-                <p class="is-size-4 is-capitalized has-text-weight-semibold has-text-left"><%= item.name %></p>
-              </div>
-              <div class="column is-one-quarter">
-                <p class="is-size-5 has-text-centered"><%= item.price %></p>
-              </div>
-              <div class="column is-one-quarter">
-                <p class="is-size-5 has-text-right"><%= item.quantity %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+  <%= render partial: "cart_state" %>
+  <div class="container p-1 m-3">
+    <div class="level">
+      <div class="level-left">
+        <p class="is-size-3 is-capitalized">Total: <%= current_user.cart.total %></p>
+      </div>
+      <div class="level-right">
+        <button class="button is-large is-success">
+          <%= link_to 'Checkout', new_order_path, class: "has-text-white" %>
+        </button>
+      </div>
+    </div>
+  </div>
 </section>
 
 

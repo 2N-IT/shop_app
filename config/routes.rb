@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   root 'products#index'
   namespace :admin do
     resources :products
+    resources :orders
     get 'home', to: 'home#index'
   end
   resources :products
+  resources :orders
   resources :carts, only: %i[update destroy show]
 end
