@@ -1,0 +1,27 @@
+<section class="section">
+  <div class="box">
+    <div class="block">
+      <p class="is-size-3">Your products:</p>
+    </div>
+    <%= render partial: "cart_state" %>
+    <div class="block">
+      <p class="mb-3 mt-5 is-size-4">Your Total: <%= current_user.cart.total %></p>
+    </div>
+  </div>
+  <div class="box">
+    <div class="block">
+      <p class="is-size-3">Your data:</p>
+    </div>
+    <% @order.attributes.except("id", "status", "created_at", "updated_at").each do |attribute_name, value| %>
+      <div class="block">
+        <strong><%= "#{attribute_name.capitalize}:" %></strong>
+        <%= value %>
+      </div>
+    <% end %>
+  </div>
+  <%= form_with url: order_path(@order.id, status: "confirmed"), method: :patch, model: @order do |f| %>
+    <div class="control">
+      <button class="button is-link">Confirm</button>
+    </div>
+  <% end %>
+</section>

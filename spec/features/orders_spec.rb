@@ -26,7 +26,7 @@ RSpec.feature 'Orders' do
       find('#order_name').set('George')
       find('#order_city').set('Hometown')
       find('#order_street').set('Groove')
-      find('#order_country').set('Boston')
+      select 'Afghanistan', from: 'order[country]'
       find('#order_province').set('Chi')
       find('#order_zip_code').set('15-123')
       select 'cash', from: 'order_payment_method'
@@ -36,9 +36,40 @@ RSpec.feature 'Orders' do
       expect(page).to have_content 'George'
       expect(page).to have_content 'Hometown'
       expect(page).to have_content 'Groove'
-      expect(page).to have_content 'Boston'
+      expect(page).to have_content 'Afghanistan'
       expect(page).to have_content 'Chi'
       expect(page).to have_content '15-123'
+    end
+
+    context 'with errors in the form' do
+      it 'renders the form back with errors' do
+        click_link 'Checkout'
+        find('#order_country').set('Not a Country')
+        find('#order_zip_code').set('not a zip code, no way')
+        click_button 'Submit'
+        expect(page).to have_content 'Please fill in your delivery and personal data'
+        expect(page).to have_content('Zip code must be a zip_code/postal code')
+        expect(page).to have_content('Zip code must be a zip_code/postal code')
+        expect(page).to have_content("Name can't be blank")
+        expect(page).to have_content("City can't be blank")
+        expect(page).to have_content("Street can't be blank")
+        expect(page).to have_content("Province can't be blank")
+      end
+    end
+
+    context 'with order ready' do
+      let!(:cart) { create(:cart, user: user) }
+      let(:product) { create :product, quantity: 11, price: 22.22 }
+      let(:product_item) { create :product_item, cart: cart, order: order, product: product, quantity: 10 }
+      let(:order) { create :order, user: cart.user }
+
+      it 'allows to confirm the order, blocking the Product quantity' do
+        visit order_path(order.id)
+        expect(page).to have_content order.name
+        expect { click_button('Confirm') }.to change { order.reload.status }.from('placed').to('confirmed')
+          .and change { product.reload.quantity }.by(product_item.quantity * -1)
+          .and change{ cart.product_items.size }.from(1).to(0)
+      end
     end
   end
 
@@ -51,9 +82,7 @@ RSpec.feature 'Orders' do
     end
 
     it 'user can not proceed to checkout' do
-      click_link 'Checkout'
-      expect(page).not_to have_content 'Please fill in your delivery and personal data'
-      expect(page).not_to have_content 'Payment method:'
+      expect(page).not_to have_content 'Checkout'
     end
   end
 end

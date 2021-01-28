@@ -19,9 +19,11 @@
         <p class="is-size-3 is-capitalized">Total: <%= current_user.cart.total %></p>
       </div>
       <div class="level-right">
-        <button class="button is-large is-success">
-          <%= link_to 'Checkout', new_order_path, class: "has-text-white" %>
-        </button>
+        <% if current_user.cart.product_items.size.positive? %>
+          <button class="button is-large is-success">
+              <%= link_to 'Checkout', new_order_path, class: "has-text-white" %>
+          </button>
+        <% end %>
       </div>
     </div>
   </div>

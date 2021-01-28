@@ -14,6 +14,10 @@ FactoryBot.define do
       status { 'canceled' }
     end
 
+    trait :confirmed do
+      status { 'confirmed' }
+    end
+
     trait :paid do
       status { 'paid' }
     end

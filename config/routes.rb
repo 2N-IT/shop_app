@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     get 'home', to: 'home#index'
   end
   resources :products
-  resources :orders
+  resources :orders do
+    member do
+      get :confirmed
+    end
+  end
   resources :carts, only: %i[update destroy show]
 end

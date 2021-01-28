@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   context 'with normal data' do
-    let(:order) { build(:order, country: COUNTRIES.sample, zip_code: '12-123') }
+    let(:user) { create :user }
+    let(:order) { build(:order, country: COUNTRIES.sample, zip_code: '12-123', user: user) }
 
     it 'saves' do
       expect(order.save!).to eq true
@@ -26,17 +27,18 @@ RSpec.describe Order, type: :model do
     end
     it 'validates and throws an error' do
       expect(order.save).to eq false
-      expect(order.errors.size).to eq 8
+      expect(order.errors.size).to eq 9
       expect(order.errors.full_messages).to eq(
         [
-          'Country Malazan Empire is not a valid size',
+          'Country Malazan Empire is not a valid country',
           'Zip code must be a zip_code/postal code',
           "Name can't be blank",
           "City can't be blank",
           "Street can't be blank",
           "Province can't be blank",
           'Payment method is not included in the list',
-          'Delivery method is not included in the list'
+          'Delivery method is not included in the list',
+          'User must exist'
         ]
       )
     end

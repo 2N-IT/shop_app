@@ -4,7 +4,10 @@ document.addEventListener("turbolinks:load", function(event) {
       el.addEventListener('click', (function () {
         let input = this.parentNode.querySelector('input');
         input.value = parseInt(input.value) - 1;
-        return false;
+        let buttons = document.querySelectorAll(".button.delete-modal.is-success")
+        for(let i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = false;
+        }
       }))
     })
   const pluses = document.querySelectorAll('.plus')
@@ -12,7 +15,10 @@ document.addEventListener("turbolinks:load", function(event) {
       el.addEventListener('click', (function () {
         let input = this.parentNode.querySelector('input');
         input.value = parseInt(input.value) + 1;
-        return false;
+        let buttons = document.querySelectorAll(".button.delete-modal.is-success")
+        for(let i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = false;
+        }
       }))
     })
 });
