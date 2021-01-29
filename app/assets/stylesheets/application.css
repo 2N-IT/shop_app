@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.flash {
+  position: fixed !important;
+  top: 153px;
+  width: 350px;
+  right: 25px;
+  padding: 20px 25px !important;
+}

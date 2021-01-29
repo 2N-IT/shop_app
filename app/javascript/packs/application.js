@@ -14,3 +14,15 @@ ActiveStorage.start()
 import "@fortawesome/fontawesome-free/css/all"
 require("packs/modal_control.js")
 require("packs/integer_input.js")
+document.addEventListener('DOMContentLoaded', () => {
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    const $notification = $delete.parentNode;
+
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
+  setTimeout(function(){
+    document.querySelector( ".flash" ).remove();
+  }, 3500);
+});

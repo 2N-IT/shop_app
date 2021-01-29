@@ -12,13 +12,22 @@
   </head>
   <body>
     <% if flash[:notice] %>
-      <div class="notification is-success"><%= flash[:notice] %></div>
+      <div class="notification flash is-success">
+        <button class="delete"></button>
+        <%= flash[:notice] %>
+      </div>
     <% end %>
     <% if flash[:alert] %>
-      <div class="notification is-warning"><%= flash[:alert] %></div>
+      <div class="notification flash is-warning">
+        <button class="delete"></button>
+        <%= flash[:alert] %>
+      </div>
     <% end %>
     <% if flash[:error] %>
-      <div class="notification is-danger"><%= flash[:error] %></div>
+      <div class="notification flash is-danger">
+        <button class="delete"></button>
+        <%= flash[:error] %>
+      </div>
     <% end %>
     <% if current_user.present? %>
       <nav class="navbar is-danger is-spaced" role="navigation" aria-label="main navigation">
