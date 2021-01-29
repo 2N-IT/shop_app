@@ -5,7 +5,9 @@ def update
   product_in_cart = cart.product_items.find_by(product_id: params[:cart][:product_id])
   new_quantity = params[:cart][:quantity].to_i
   if product_in_cart
-    new_quantity.zero? ? product_in_cart.destroy : product_in_cart.update(quantity: new_quantity)
+    product_in_cart.destroy if new_quantity.zero?
+
+    product_in_cart.update(quantity: new_quantity) if new_quantity <= product_in_cart.product.quantity
   else
     ProductItem.create(
       cart: cart,
